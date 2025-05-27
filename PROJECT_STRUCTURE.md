@@ -30,6 +30,8 @@ Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/
 │   ├── experiment_analysis.ipynb   # Main analysis notebook
 │   └── README.md                   # Notebook documentation
 ├── 📁 tests/                        # Test suite
+│   ├── test_components.py          # Component testing
+│   ├── conftest.py                 # Pytest configuration
 │   └── __init__.py
 ├── 📁 data/                         # Data directory
 │   └── README.md                   # Data organization guide
@@ -39,8 +41,8 @@ Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/
 │   └── default_config.yaml        # Default hyperparameters
 ├── 📄 main_train.py                # Training script
 ├── 📄 main_evaluate.py             # Evaluation script
-├── 📄 test_components.py           # Component testing
-
+├── 📄 Makefile                     # Development automation
+├── 📄 pytest.ini                   # Pytest configuration
 ├── 📄 pyproject.toml               # Modern Python project config
 ├── 📄 MANIFEST.in                  # Package manifest
 ├── 📄 requirements.txt             # Dependencies

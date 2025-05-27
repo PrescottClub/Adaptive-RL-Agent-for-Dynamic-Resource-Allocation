@@ -60,7 +60,7 @@ notebooks = [
 [project.scripts]
 adaptive-rl-train = "main_train:main"
 adaptive-rl-eval = "main_evaluate:main"
-adaptive-rl-test = "test_components:main"
+adaptive-rl-test = "tests.test_components:main"
 
 [project.urls]
 Homepage = "https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation"
@@ -129,7 +129,7 @@ warn_unreachable = true
 strict_equality = true
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "test_components.py"]
+testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]

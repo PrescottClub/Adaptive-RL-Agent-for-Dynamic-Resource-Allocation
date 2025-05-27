@@ -21,6 +21,8 @@ env/
 # IDEs and editors
 .idea/
 .vscode/
+.cursor/
+.cursorignore
 *.suo
 *.ntvs*
 *.njsproj

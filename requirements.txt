@@ -3,5 +3,5 @@ pandas
 matplotlib
 scipy
 tqdm
-openai-gym
+gymnasium
 torch 

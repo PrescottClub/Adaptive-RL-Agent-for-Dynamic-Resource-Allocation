@@ -1,10 +1,32 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# PyTorch
-*.pt
-*.pth
+# PyTorch models (keep example models, ignore large training outputs)
+# *.pt
+# *.pth
+models/training_*
+models/temp_*
+models/backup_*
 
 # Environments
 .env
@@ -12,11 +34,19 @@ __pycache__/
 venv/
 ENV/
 env/
+.conda/
 
-# Data files
-*.csv
-*.json
+# Data files (keep small example data, ignore large datasets)
+# *.csv
+# *.json
+# *.log
+data/raw/
+data/processed/
+data/external/
+logs/
 *.log
+results/temp_*
+results/backup_*
 
 # IDEs and editors
 .idea/
@@ -27,4 +57,41 @@ env/
 *.ntvs*
 *.njsproj
 *.sln
-*.sw? 
+*.sw?
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json 

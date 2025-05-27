@@ -69,10 +69,11 @@ Documentation = "https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-R
 "Bug Reports" = "https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/issues"
 
 [tool.setuptools]
-packages = ["src"]
+packages = {find = {}}
 
-[tool.setuptools.package-dir]
-"" = "."
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
 
 [tool.black]
 line-length = 88

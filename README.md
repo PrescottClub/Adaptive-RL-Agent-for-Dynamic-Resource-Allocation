@@ -1,327 +1,342 @@
-# Adaptive RL Agent for Dynamic Resource Allocation
+# 🚀 自适应强化学习智能体：动态资源分配系统
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)](https://pytorch.org/)
 [![Gymnasium](https://img.shields.io/badge/Gymnasium-0.29+-green.svg)](https://gymnasium.farama.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 Overview
+## 🎯 项目概述
 
-This project implements a **Deep Reinforcement Learning (DRL)** solution for dynamic resource allocation using **Deep Q-Networks (DQN)** and **Double DQN** algorithms. The system optimizes bandwidth allocation across multiple network services in real-time, demonstrating the application of modern RL techniques to practical resource management problems.
+本项目实现了一个基于**深度强化学习（DRL）**的动态资源分配解决方案，采用**深度Q网络（DQN）**和**双重DQN**算法。系统能够实时优化多个网络服务的带宽分配，展示了现代强化学习技术在实际资源管理问题中的应用。
 
-### Key Innovations
-- **Novel Environment Design**: Custom OpenAI Gymnasium environment simulating dynamic network traffic management
-- **Comparative Algorithm Study**: Side-by-side implementation of DQN vs. Double DQN for overestimation bias analysis
-- **Real-world Application**: Addresses practical challenges in network resource allocation and QoS optimization
-- **Comprehensive Evaluation Framework**: Complete testing, training, and analysis pipeline
+### 🌟 核心创新点
+- **🏗️ 创新环境设计**：基于OpenAI Gymnasium的自定义动态网络流量管理环境
+- **⚖️ 算法对比研究**：DQN与Double DQN的并行实现，深入分析过估计偏差问题
+- **🌐 实际应用导向**：解决网络资源分配和QoS优化的实际挑战
+- **📊 完整评估框架**：涵盖测试、训练和分析的完整流水线
+- **🎮 智能决策系统**：实时响应动态需求变化的自适应分配策略
 
-## 🏗️ Architecture
+## 🏗️ 系统架构
 
-### System Components
+### 核心组件
 
 ```
 ├── src/
-│   ├── environments/          # Custom Gymnasium environments
-│   │   └── network_traffic_env.py    # Dynamic traffic management environment
-│   ├── agents/               # RL agent implementations
-│   │   ├── dqn_agent.py     # Standard DQN agent
-│   │   └── double_dqn_agent.py      # Double DQN agent
-│   ├── models/               # Neural network architectures
-│   │   └── dqn_model.py     # Deep Q-Network model (PyTorch)
-│   └── utils/                # Utility functions and classes
-│       ├── replay_buffer.py  # Experience replay implementation
-│       └── plotters.py       # Visualization and analysis tools
-├── notebooks/                # Jupyter notebooks for analysis
-├── main_train.py            # Training script with CLI interface
-├── main_evaluate.py         # Evaluation and comparison script
-└── test_components.py       # Comprehensive testing suite
+│   ├── environments/          # 自定义Gymnasium环境
+│   │   └── network_traffic_env.py    # 动态流量管理环境
+│   ├── agents/               # 强化学习智能体实现
+│   │   ├── dqn_agent.py     # 标准DQN智能体
+│   │   └── double_dqn_agent.py      # 双重DQN智能体
+│   ├── models/               # 神经网络架构
+│   │   └── dqn_model.py     # 深度Q网络模型（PyTorch）
+│   └── utils/                # 工具函数和类
+│       ├── replay_buffer.py  # 经验回放实现
+│       └── plotters.py       # 可视化和分析工具
+├── notebooks/                # Jupyter分析笔记本
+│   └── experiment_analysis.ipynb    # 核心实验分析
+├── main_train.py            # 训练脚本（CLI接口）
+├── main_evaluate.py         # 评估和对比脚本
+└── test_components.py       # 综合测试套件
 ```
 
-## 🌟 Features
+## 🌟 核心特性
 
-### Environment: Dynamic Network Traffic Manager
-- **Multi-Service Architecture**: Manages 4 service types (Video, Gaming, Downloads, Web Browsing)
-- **Dynamic Demand Simulation**: Real-time fluctuating demand patterns
-- **Intelligent Reward Design**: Penalties for unmet demand and bandwidth waste, rewards for optimal allocation
-- **State Space**: 8-dimensional continuous space (demands + current allocations)
-- **Action Space**: 5 discrete actions for bandwidth adjustment
+### 环境：动态网络流量管理器
+- **🎯 多服务架构**：管理4种服务类型（视频、游戏、下载、网页浏览）
+- **📈 动态需求仿真**：实时波动的需求模式
+- **🧠 智能奖励设计**：对未满足需求和带宽浪费进行惩罚，对最优分配进行奖励
+- **🔢 状态空间**：8维连续空间（需求+当前分配）
+- **⚡ 动作空间**：5个离散动作用于带宽调整
 
-### Agents
-- **DQN Agent**: Classical Deep Q-Network with experience replay and target networks
-- **Double DQN Agent**: Enhanced version addressing Q-value overestimation bias
-- **Shared Features**:
-  - Experience replay buffer (configurable size)
-  - Target network with soft updates
-  - ε-greedy exploration with decay
-  - GPU acceleration support
-  - Model save/load functionality
+### 智能体
+- **🤖 DQN智能体**：经典深度Q网络，具备经验回放和目标网络
+- **🔄 双重DQN智能体**：增强版本，解决Q值过估计偏差
+- **🛠️ 共享特性**：
+  - 经验回放缓冲区（可配置大小）
+  - 软更新目标网络
+  - ε-贪婪探索策略（带衰减）
+  - GPU加速支持
+  - 模型保存/加载功能
 
-### Training & Evaluation
-- **Flexible Training Pipeline**: Configurable hyperparameters via command-line interface
-- **Real-time Monitoring**: Progress tracking with visualization
-- **Comprehensive Evaluation**: Performance metrics, comparative analysis, and statistical significance testing
-- **Visualization Suite**: Training curves, epsilon decay, environment metrics, and comparative plots
+### 训练与评估
+- **🔧 灵活训练流水线**：通过命令行界面配置超参数
+- **📊 实时监控**：进度跟踪和可视化
+- **📈 综合评估**：性能指标、对比分析和统计显著性测试
+- **🎨 可视化套件**：训练曲线、epsilon衰减、环境指标和对比图表
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Prerequisites
+### 环境要求
 ```bash
 Python 3.8+
-pip package manager
+pip 包管理器
 ```
 
-### Installation
+### 安装步骤
 ```bash
-# Clone the repository
+# 克隆仓库
 git clone https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation.git
 cd Adaptive-RL-Agent-for-Dynamic-Resource-Allocation
 
-# Install dependencies
+# 安装依赖
 pip install -r requirements.txt
 
-# Verify installation
+# 验证安装
 python test_components.py
 ```
 
-### Basic Usage
+### 基本使用
 
-#### 1. Train DQN Agent
+#### 1. 训练DQN智能体
 ```bash
 python main_train.py --agent dqn --episodes 2000 --save_every 500
 ```
 
-#### 2. Train Double DQN Agent
+#### 2. 训练双重DQN智能体
 ```bash
 python main_train.py --agent double_dqn --episodes 2000 --save_every 500
 ```
 
-#### 3. Evaluate Single Agent
+#### 3. 评估单个智能体
 ```bash
 python main_evaluate.py --mode single --agent dqn --model_path models/dqn_final.pth
 ```
 
-#### 4. Compare Agents
+#### 4. 对比智能体性能
 ```bash
 python main_evaluate.py --mode compare --dqn_model models/dqn_final.pth --ddqn_model models/double_dqn_final.pth
 ```
 
-## 📊 Detailed Usage
-
-### Training Configuration
+#### 5. 🎯 核心展示：运行实验分析
 ```bash
-python main_train.py \
-    --agent dqn \                    # Agent type: 'dqn' or 'double_dqn'
-    --episodes 2000 \                # Number of training episodes
-    --max_steps 1000 \               # Maximum steps per episode
-    --eps_start 1.0 \                # Initial epsilon value
-    --eps_end 0.01 \                 # Final epsilon value
-    --eps_decay 0.995 \              # Epsilon decay rate
-    --target_score 200.0 \           # Target average score for early stopping
-    --save_every 500 \               # Model checkpoint frequency
-    --model_path models/             # Model save directory
+# 启动Jupyter Notebook
+jupyter notebook
+
+# 打开并运行 notebooks/experiment_analysis.ipynb
+# 这是项目的核心展示文件，包含完整的实验分析和可视化
 ```
 
-### Evaluation Options
+## 📊 详细使用说明
+
+### 训练配置
+```bash
+python main_train.py \
+    --agent dqn \                    # 智能体类型：'dqn' 或 'double_dqn'
+    --episodes 2000 \                # 训练回合数
+    --max_steps 1000 \               # 每回合最大步数
+    --eps_start 1.0 \                # 初始epsilon值
+    --eps_end 0.01 \                 # 最终epsilon值
+    --eps_decay 0.995 \              # Epsilon衰减率
+    --target_score 200.0 \           # 早停目标平均分数
+    --save_every 500 \               # 模型检查点频率
+    --model_path models/             # 模型保存目录
+```
+
+### 评估选项
 ```bash
 python main_evaluate.py \
-    --mode compare \                 # Evaluation mode: 'single' or 'compare'
-    --episodes 100 \                 # Number of evaluation episodes
-    --render \                       # Enable environment rendering
+    --mode compare \                 # 评估模式：'single' 或 'compare'
+    --episodes 100 \                 # 评估回合数
+    --render \                       # 启用环境渲染
     --dqn_model models/dqn_final.pth \
     --ddqn_model models/double_dqn_final.pth
 ```
 
-## 🧪 Experimental Results
+## 🧪 实验结果
 
-### Performance Metrics
-- **Convergence Speed**: Typical convergence within 1000-1500 episodes
-- **Sample Efficiency**: Improved learning with experience replay
-- **Stability**: Double DQN shows reduced variance in Q-value estimates
-- **Resource Utilization**: Achieves 85-95% optimal allocation efficiency
+### 性能指标
+- **🚀 收敛速度**：通常在1000-1500回合内收敛
+- **📈 样本效率**：通过经验回放提升学习效率
+- **🎯 稳定性**：双重DQN显示出更低的Q值估计方差
+- **⚡ 资源利用率**：达到85-95%的最优分配效率
 
-### Expected Outcomes
-- **DQN vs Double DQN**: Double DQN typically shows 5-15% performance improvement
-- **Learning Curves**: Smooth convergence with proper hyperparameter tuning
-- **Environment Dynamics**: Adaptive response to changing demand patterns
+### 预期结果
+- **🔄 DQN vs 双重DQN**：双重DQN通常显示5-15%的性能提升
+- **📊 学习曲线**：通过适当的超参数调优实现平滑收敛
+- **🌊 环境动态**：对需求模式变化的自适应响应
 
-## 🔬 Research Applications
+## 🔬 技术亮点与创新
 
-### Academic Use Cases
-- **Algorithm Comparison Studies**: DQN vs Double DQN performance analysis
-- **Hyperparameter Sensitivity**: Systematic exploration of training parameters
-- **Environment Design**: Custom RL environment development patterns
-- **Transfer Learning**: Adaptation to different resource allocation scenarios
+### 算法创新
+- **🧠 过估计偏差解决**：双重DQN有效减少Q值过估计问题
+- **🎯 自适应探索策略**：动态调整探索与利用平衡
+- **📚 经验回放优化**：高效的样本重用机制
 
-### Industry Applications
-- **Network Management**: ISP bandwidth allocation optimization
-- **Cloud Computing**: Dynamic resource provisioning in data centers
-- **IoT Systems**: Resource allocation in edge computing environments
-- **Smart Grids**: Energy distribution optimization
+### 环境设计创新
+- **🌐 多维状态空间**：综合考虑需求和分配状态
+- **⚡ 实时响应机制**：模拟真实网络环境的动态特性
+- **🎮 智能奖励函数**：平衡效率与公平性的奖励设计
 
-## 📈 Analysis and Visualization
+## 🔬 研究应用
 
-### Built-in Analytics
-- **Training Progress**: Episode scores, moving averages, convergence analysis
-- **Exploration Dynamics**: Epsilon decay visualization and impact analysis
-- **Environment Behavior**: Demand patterns and allocation strategies
-- **Comparative Performance**: Statistical significance testing between algorithms
+### 学术应用场景
+- **🔍 算法对比研究**：DQN与双重DQN性能分析
+- **🎛️ 超参数敏感性**：训练参数的系统性探索
+- **🏗️ 环境设计**：自定义强化学习环境开发模式
+- **🔄 迁移学习**：适应不同资源分配场景
 
-### Jupyter Notebooks
-Located in `notebooks/` directory:
-- **experiment_analysis.ipynb**: Comprehensive training results analysis
-- **environment_exploration.ipynb**: Environment behavior and reward function analysis
-- **hyperparameter_tuning.ipynb**: Systematic parameter optimization
-- **xai_analysis.ipynb**: Explainable AI and decision interpretation
+### 工业应用场景
+- **🌐 网络管理**：ISP带宽分配优化
+- **☁️ 云计算**：数据中心动态资源配置
+- **📱 物联网系统**：边缘计算环境资源分配
+- **⚡ 智能电网**：能源分配优化
+- **🚗 智能交通**：交通流量动态调度
 
-## 🧩 Technical Implementation
+## 📈 分析与可视化
 
-### Neural Network Architecture
+### 内置分析功能
+- **📊 训练进度**：回合分数、移动平均、收敛分析
+- **🔍 探索动态**：Epsilon衰减可视化和影响分析
+- **🌊 环境行为**：需求模式和分配策略
+- **⚖️ 对比性能**：算法间统计显著性测试
+
+### 核心展示笔记本
+位于 `notebooks/` 目录：
+- **🎯 experiment_analysis.ipynb**：**核心展示文件** - 完整的训练结果分析和可视化
+
+## 🧩 技术实现
+
+### 神经网络架构
 ```python
 class DQN(nn.Module):
     def __init__(self, n_observations, n_actions):
         super(DQN, self).__init__()
-        self.layer1 = nn.Linear(n_observations, 128)
-        self.layer2 = nn.Linear(128, 128)
-        self.layer3 = nn.Linear(128, n_actions)
-    
+        self.layer1 = nn.Linear(n_observations, 128)  # 输入层到隐藏层
+        self.layer2 = nn.Linear(128, 128)             # 隐藏层
+        self.layer3 = nn.Linear(128, n_actions)       # 输出层（Q值）
+
     def forward(self, x):
-        x = F.relu(self.layer1(x))
-        x = F.relu(self.layer2(x))
-        return self.layer3(x)
+        x = F.relu(self.layer1(x))  # ReLU激活
+        x = F.relu(self.layer2(x))  # ReLU激活
+        return self.layer3(x)       # 输出Q值
 ```
 
-### Key Algorithms
+### 核心算法
 
-#### Experience Replay
-- **Buffer Size**: Configurable (default: 100,000)
-- **Sampling**: Uniform random sampling
-- **Update Frequency**: Every 4 steps (configurable)
+#### 经验回放机制
+- **🗃️ 缓冲区大小**：可配置（默认：100,000）
+- **🎲 采样策略**：均匀随机采样
+- **🔄 更新频率**：每4步更新一次（可配置）
 
-#### Target Network Updates
-- **Soft Updates**: τ = 0.001 (configurable)
-- **Frequency**: Every training step
-- **Stability**: Prevents moving target problem
+#### 目标网络更新
+- **🔄 软更新**：τ = 0.001（可配置）
+- **⏰ 更新频率**：每个训练步骤
+- **🎯 稳定性**：防止移动目标问题
 
-#### Exploration Strategy
-- **ε-greedy**: Balanced exploration vs exploitation
-- **Decay Schedule**: Exponential decay (0.995 default)
-- **Minimum ε**: 0.01 (maintains minimal exploration)
+#### 探索策略
+- **🎯 ε-贪婪**：平衡探索与利用
+- **📉 衰减计划**：指数衰减（默认0.995）
+- **🔻 最小ε**：0.01（保持最小探索）
 
-## 🔧 Advanced Configuration
+## 🔧 高级配置
 
-### Environment Customization
+### 环境自定义
 ```python
-# Custom reward function example
+# 自定义奖励函数示例
 def custom_reward(demands, allocations):
-    # Penalty for unmet demand
+    # 未满足需求的惩罚
     unmet_penalty = np.sum(np.maximum(0, demands - allocations))
-    
-    # Penalty for wasted resources
+
+    # 资源浪费的惩罚
     waste_penalty = np.sum(np.maximum(0, allocations - demands))
-    
-    # Bonus for balanced allocation
+
+    # 平衡分配的奖励
     balance_bonus = -np.std(allocations)
-    
+
     return -(unmet_penalty + 0.5 * waste_penalty) + balance_bonus
 ```
 
-### Agent Hyperparameters
+### 智能体超参数
 ```python
 agent = DQNAgent(
-    state_size=8,
-    action_size=5,
-    lr=5e-4,                # Learning rate
-    buffer_size=100000,     # Replay buffer size
-    batch_size=64,          # Training batch size
-    gamma=0.99,             # Discount factor
-    tau=1e-3,               # Target network update rate
-    update_every=4,         # Learning frequency
-    epsilon=1.0,            # Initial exploration rate
-    epsilon_min=0.01,       # Minimum exploration rate
-    epsilon_decay=0.995     # Exploration decay rate
+    state_size=8,           # 状态空间维度
+    action_size=5,          # 动作空间大小
+    lr=5e-4,                # 学习率
+    buffer_size=100000,     # 回放缓冲区大小
+    batch_size=64,          # 训练批次大小
+    gamma=0.99,             # 折扣因子
+    tau=1e-3,               # 目标网络更新率
+    update_every=4,         # 学习频率
+    epsilon=1.0,            # 初始探索率
+    epsilon_min=0.01,       # 最小探索率
+    epsilon_decay=0.995     # 探索衰减率
 )
 ```
 
-## 🧪 Testing Framework
+## 🧪 测试框架
 
-### Automated Testing
+### 自动化测试
 ```bash
 python test_components.py
 ```
 
-#### Test Coverage
-- **Environment Functionality**: State/action spaces, episode mechanics
-- **Model Architecture**: Network structure, forward pass validation
-- **Agent Behavior**: Action selection, learning updates
-- **Integration Testing**: Environment-agent interaction
-- **Data Pipeline**: Replay buffer, experience sampling
+#### 测试覆盖范围
+- **🌐 环境功能**：状态/动作空间、回合机制
+- **🧠 模型架构**：网络结构、前向传播验证
+- **🤖 智能体行为**：动作选择、学习更新
+- **🔗 集成测试**：环境-智能体交互
+- **📊 数据流水线**：回放缓冲区、经验采样
 
-## 📋 Requirements
+## 📋 依赖要求
 
-### Core Dependencies
+### 核心依赖
 ```
-numpy>=1.21.0
-pandas>=1.3.0
-matplotlib>=3.4.0
-scipy>=1.7.0
-tqdm>=4.62.0
-gymnasium>=0.29.0
-torch>=2.0.0
-```
-
-### Optional Dependencies
-```
-jupyter>=1.0.0          # For notebook analysis
-seaborn>=0.11.0         # Enhanced visualizations
-tensorboard>=2.8.0      # Training monitoring
+numpy>=1.21.0           # 数值计算
+pandas>=1.3.0           # 数据处理
+matplotlib>=3.4.0       # 基础可视化
+scipy>=1.7.0            # 科学计算
+tqdm>=4.62.0            # 进度条
+gymnasium>=0.29.0       # 强化学习环境
+torch>=2.0.0            # 深度学习框架
 ```
 
-## 🤝 Contributing
+### 可选依赖
+```
+jupyter>=1.0.0          # 笔记本分析
+seaborn>=0.11.0         # 增强可视化
+tensorboard>=2.8.0      # 训练监控
+```
 
-### Development Setup
+## 🤝 贡献指南
+
+### 开发环境设置
 ```bash
-# Fork and clone the repository
+# Fork并克隆仓库
 git clone https://github.com/YourUsername/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation.git
 
-# Create development environment
+# 创建开发环境
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install in development mode
+# 开发模式安装
 pip install -e .
 pip install -r requirements-dev.txt
 ```
 
-### Code Style
-- **Formatting**: Black code formatter
-- **Linting**: flake8 for style checking
-- **Type Hints**: Encouraged for new code
-- **Documentation**: Comprehensive docstrings
+### 代码规范
+- **🎨 格式化**：Black代码格式化器
+- **🔍 代码检查**：flake8样式检查
+- **📝 类型提示**：鼓励为新代码添加类型提示
+- **📚 文档**：完整的文档字符串
 
-### Contribution Guidelines
-1. **Issues**: Use GitHub issues for bug reports and feature requests
-2. **Pull Requests**: Follow the PR template and ensure tests pass
-3. **Code Review**: All changes require review before merging
-4. **Testing**: Maintain test coverage above 80%
+## 📄 许可证
 
-## 📄 License
+本项目采用MIT许可证 - 详见 [LICENSE](LICENSE) 文件。
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🙏 致谢
 
-## 🙏 Acknowledgments
+- **OpenAI Gymnasium**：提供强化学习环境框架
+- **PyTorch团队**：提供深度学习框架
+- **研究社区**：提供DQN和双重DQN算法的基础理论
+- **贡献者**：所有为本项目做出贡献的开发者
 
-- **OpenAI Gymnasium**: For the RL environment framework
-- **PyTorch Team**: For the deep learning framework
-- **Research Community**: For foundational DQN and Double DQN algorithms
-- **Contributors**: All developers who have contributed to this project
+## 📞 联系方式
 
-## 📞 Contact
+- **📁 仓库地址**：[GitHub](https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation)
+- **🐛 问题反馈**：[GitHub Issues](https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/issues)
+- **💬 讨论交流**：[GitHub Discussions](https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/discussions)
 
-- **Repository**: [GitHub](https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation)
-- **Issues**: [GitHub Issues](https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/PrescottClub/Adaptive-RL-Agent-for-Dynamic-Resource-Allocation/discussions)
-
-## 📚 References
+## 📚 参考文献
 
 1. Mnih, V., et al. (2015). Human-level control through deep reinforcement learning. Nature.
 2. Van Hasselt, H., et al. (2016). Deep reinforcement learning with double q-learning. AAAI.
@@ -330,4 +345,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**⭐ Star this repository if you find it useful!** 
+**⭐ 如果您觉得这个项目有用，请给我们一个Star！**
+
+## 🎯 核心展示
+
+**重要提醒**：本项目的核心展示在 `notebooks/experiment_analysis.ipynb` 文件中，包含：
+- 🔬 完整的实验分析
+- 📊 详细的性能对比
+- 🎨 丰富的可视化图表
+- 📈 训练过程监控
+- 🧠 算法深度解析
+
+请确保运行该笔记本以查看项目的完整功能展示！

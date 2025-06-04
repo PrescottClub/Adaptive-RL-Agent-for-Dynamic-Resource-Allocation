@@ -4,8 +4,13 @@ Test script to verify all components of the Adaptive RL Agent project.
 """
 
 import sys
+import os
 import numpy as np
 import torch
+
+# Add the project root to the Python path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
 
 def test_environment():
     """Test the custom environment."""

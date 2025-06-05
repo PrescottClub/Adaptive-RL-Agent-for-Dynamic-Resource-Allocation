@@ -219,18 +219,21 @@ class MetaEnvironmentWrapper(gym.Env):
     
     def _adapt_observation_space(self):
         """适配观察空间"""
-        # 根据资源数量调整观察空间
-        obs_dim = self.task_config.resource_count * 2  # 需求 + 分配
+        # 统一使用最大维度以保证一致性（最大8个资源 = 16维状态）
+        max_resources = 8
+        obs_dim = max_resources * 2  # 需求 + 分配
         self.observation_space = spaces.Box(
             low=0, high=1, 
             shape=(obs_dim,), 
             dtype=np.float32
         )
+        self._max_obs_dim = obs_dim
     
     def _adapt_action_space(self):
         """适配动作空间"""
-        # 动作数量 = 资源数量 * 2 (增加/减少)
-        action_count = self.task_config.resource_count * 2
+        # 统一使用最大动作数量以保证一致性
+        max_resources = 8
+        action_count = max_resources * 2  # 增加/减少
         self.action_space = spaces.Discrete(action_count)
     
     def _adapt_reward_function(self):
@@ -266,20 +269,42 @@ class MetaEnvironmentWrapper(gym.Env):
     
     def _adapt_observation(self, obs):
         """适配观察值"""
-        # 简单实现：截断或填充到目标维度
-        target_dim = self.observation_space.shape[0]
-        if len(obs) > target_dim:
-            return obs[:target_dim]
-        elif len(obs) < target_dim:
-            padded = np.zeros(target_dim)
-            padded[:len(obs)] = obs
-            return padded
-        return obs
+        # 将基础环境的8维观察扩展到任务特定维度，然后填充到最大维度
+        target_dim = self.observation_space.shape[0]  # 16维
+        
+        # 首先扩展基础观察到当前任务的实际维度
+        task_obs_dim = self.task_config.resource_count * 2
+        
+        if len(obs) < task_obs_dim:
+            # 如果基础观察小于任务维度，进行扩展
+            expanded_obs = np.zeros(task_obs_dim)
+            # 复制需求部分（前一半）
+            demands_count = min(len(obs) // 2, self.task_config.resource_count)
+            expanded_obs[:demands_count] = obs[:demands_count]
+            # 复制分配部分（后一半）
+            if len(obs) > demands_count:
+                expanded_obs[self.task_config.resource_count:self.task_config.resource_count + demands_count] = obs[demands_count:demands_count + demands_count]
+        else:
+            expanded_obs = obs[:task_obs_dim]
+        
+        # 然后填充到统一的最大维度
+        if len(expanded_obs) < target_dim:
+            padded_obs = np.zeros(target_dim, dtype=np.float32)
+            padded_obs[:len(expanded_obs)] = expanded_obs
+            return padded_obs
+        else:
+            return expanded_obs[:target_dim].astype(np.float32)
     
     def _adapt_action(self, action):
         """适配动作"""
         # 将元动作映射到基础环境动作
         base_action_count = self.base_env.action_space.n
+        
+        # 如果动作超出当前任务的有效范围，映射到有效范围内
+        task_action_count = self.task_config.resource_count * 2
+        if action >= task_action_count:
+            action = action % task_action_count
+            
         return action % base_action_count
     
     def _adapt_reward(self, base_reward, obs, action):

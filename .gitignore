@@ -27,6 +27,12 @@ MANIFEST
 models/training_*
 models/temp_*
 models/backup_*
+*.pth
+*.pt
+
+# Notebooks (ignore legacy notebooks)
+notebooks/
+legacy/
 
 # Environments
 .env

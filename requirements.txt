@@ -1,7 +1,36 @@
-numpy
-pandas
-matplotlib
-scipy
-tqdm
-gymnasium
-torch 
+# 核心AI/ML库
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# 可视化库
+matplotlib>=3.6.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# 科学计算库
+scikit-learn>=1.3.0
+scipy>=1.10.0
+
+# Jupyter相关
+jupyter>=1.0.0
+notebook>=6.5.0
+ipywidgets>=8.0.0
+tqdm>=4.65.0
+
+# 数据处理
+pyyaml>=6.0
+pathlib>=1.0.1
+
+# 网络分析
+networkx>=3.0
+
+# 图像处理（可选）
+pillow>=10.0.0
+
+# 开发工具（可选）
+pytest>=7.0.0
+black>=23.0.0
+
+gymnasium 

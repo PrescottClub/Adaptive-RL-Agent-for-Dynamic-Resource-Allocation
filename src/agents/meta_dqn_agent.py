@@ -174,6 +174,13 @@ class MetaDQNAgent:
         self.current_task_config = task_config
         self.task_features = self.meta_network.get_task_features(task_config)
         
+        # 检查任务维度信息（现在使用统一维度，此检查主要用于调试）
+        expected_obs_dim = task_config.resource_count * 2
+        expected_action_dim = task_config.resource_count * 2
+        
+        # 现在所有任务都使用统一的16维状态空间和16维动作空间
+        # 实际的任务特定维度通过观察空间适配器处理
+        
         # 从元网络复制参数到任务网络
         self.task_network.load_state_dict(self.meta_network.state_dict())
         

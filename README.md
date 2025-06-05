@@ -212,16 +212,12 @@ python tests/robustness_tests.py
 #### 元学习目标函数
 我们的创新目标函数融合了Transformer注意力与MAML：
 
-```math
-\min_{\theta} \mathbb{E}_{\mathcal{T} \sim p(\mathcal{T})} \left[ \mathcal{L}_{\mathcal{T}}^{query}(f_{\phi_{\mathcal{T}}}) \right]
-```
+$$\min_{\theta} \mathbb{E}_{\mathcal{T} \sim p(\mathcal{T})} \left[ \mathcal{L}_{\mathcal{T}}^{query}(f_{\phi_{\mathcal{T}}}) \right]$$
 
 其中 $\phi_{\mathcal{T}} = \theta - \alpha \nabla_{\theta} \mathcal{L}_{\mathcal{T}}^{support}(f_{\theta})$
 
 #### Transformer增强状态表示
-```math
-h_t = \text{Transformer}(\text{Attention}(Q_t, K_{context}, V_{state}))
-```
+$$h_t = \text{Transformer}(\text{Attention}(Q_t, K_{context}, V_{state}))$$
 
 ### 📚 理论保证与界限
 
@@ -455,4 +451,4 @@ spec:
 
 ---
 
-*最后更新时间: 2024年12月*
+*最后更新时间: 2025年5月6日*
